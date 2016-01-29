@@ -1,0 +1,32 @@
+/*!
+ * Statamic: PageReorder Redux
+*/
+
+.drag-handle {
+  display: inline-block;
+  cursor: move; /* fallback if grab cursor is unsupported */
+  cursor: grab;
+  cursor: -moz-grab;
+  cursor: -webkit-grab;
+  padding-right: 20px;
+}
+
+.simple-table td.checkbox-col {
+  padding: 10px 0 10px 10px;
+  white-space: nowrap;
+  width: auto;
+}
+
+.set-sort {
+  cursor: pointer;
+  transition: all .2s;
+}
+
+.set-sort.disabled {
+  background-color: lightgray;
+  background-image: none;
+  border-color: lightgray;
+  color: #B3B3B3;
+  cursor: not-allowed;
+  text-shadow: none;
+}
