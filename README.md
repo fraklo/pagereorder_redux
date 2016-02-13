@@ -6,5 +6,4 @@ This plugin was originally a simple modification of the add-on found here: https
 
 ## To install
 1. Download the zip file (or clone via git) and unzip it or clone the repo into `/_add-ons/`.
-2. Ensure the folder name is `pagereorder_redux`
-3. Check out your drag drop re-ordering via the admin. Snazzy.
+2. Check out your drag drop re-ordering via the admin. Snazzy.

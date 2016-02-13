@@ -46,9 +46,10 @@ class Hooks_pagereorder_redux extends Hooks {
 
     // Get POST data from request.
     $order = Request::post('order', false);
+    $entry_folder = Request::post('entry_folder', false);
 
     // Make sure we've got a response.
-    if (!$order) {
+    if (!$order || !$entry_folder) {
       Log::error($response['message'], 'pagereorder_redux');
       echo json_encode($response);
       return false;
@@ -58,9 +59,6 @@ class Hooks_pagereorder_redux extends Hooks {
     $page_order = json_decode($order);
 
     if(isset($page_order[0]->url) && $page_order[0]->url != '') {
-      $entry_folder = implode('/', explode('/', $page_order[0]->url, -1));
-      $entry_folder = str_replace(Config::getSiteRoot(), '', $entry_folder);
-
       $response = $this->order_set($page_order, $entry_folder);
     } else {
       $response['message'] = "The data submitted was invalid";
@@ -89,8 +87,8 @@ class Hooks_pagereorder_redux extends Hooks {
 
     // Loop over original folder structure and rename all folders to
     // reflect the new order.
-    $entry_folder = implode('/', explode('/', $page_order[0]->url, -1));
-    $entry_folder = str_replace(Config::getSiteRoot(), '', $entry_folder);
+    $entry_url = implode('/', explode('/', $page_order[0]->url, -1));
+    $entry_url = str_replace(Config::getSiteRoot(), '', $entry_folder);
     foreach ($page_order as $page) {
       $page_url = str_replace(Config::getSiteRoot(), '/', $page->url);
       foreach ($entries as $entry) {
@@ -106,6 +104,7 @@ class Hooks_pagereorder_redux extends Hooks {
           break;
         }
       }
+
 
       $slug = explode('/', $page->url);
       $slug = preg_replace("/^\/(.+)/uis", "$1", end($slug));

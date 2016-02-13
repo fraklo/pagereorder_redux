@@ -3,8 +3,8 @@
 
   var sortTimer = null,
       flashBar = $('#status-bar'),
-      fixHelper, flashes, flashMessage, initialize,
-      orderGet, orderSubmit, tableInfoUpdate;
+      fixHelper, flashes, flashMessage, getParam,
+      initialize, orderGet, orderSubmit, tableInfoUpdate;
 
   // Flash messages
   flashes = {
@@ -122,7 +122,8 @@
     $.ajax("/TRIGGER/pagereorder_redux/reorder", {
       type: 'POST',
       data: {
-        order: data
+        order: data,
+        entry_folder: getParam('path')
       },
       complete: function(jqxhr) {
         var flashObj = {
@@ -160,6 +161,17 @@
       }
     });
   };
+
+  getParam = function(name){
+    var name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]"),
+        regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+        params = regex.exec(location.search),
+        result = '';
+    if(params) {
+      result = decodeURIComponent(params[1].replace(/\+/g, " "));
+    }
+    return result;
+  }
 
 
   // Updates the table with updated links
