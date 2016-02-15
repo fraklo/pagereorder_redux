@@ -66,6 +66,12 @@
                           'Update Sort' +
                         '</div>';
 
+    // Only function on number index entries
+    if(isNaN(form.find('td.title').next('td').html())) {
+      console.log('PageReorder_Redux Only works on # entries');
+      return false;
+    }
+
     // Add update button at top and bottom of form
     form.prepend(updateButton)
               .find('.section').after(updateButton);
@@ -119,7 +125,8 @@
 
   // Submits the new order
   orderSubmit = function(data) {
-    $.ajax("/TRIGGER/pagereorder_redux/reorder", {
+    var baseURL = window.location.href.split('admin.php');
+    $.ajax(baseURL[0]+"TRIGGER/pagereorder_redux/reorder", {
       type: 'POST',
       data: {
         order: data,

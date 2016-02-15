@@ -3,7 +3,7 @@ class Hooks_pagereorder_redux extends Hooks {
 
   public $meta = array(
      'name'       => 'Page Reorder Redux',
-     'version'    => '0.2.8',
+     'version'    => '0.3.0',
      'author'     => 'Frak Lopez',
      'author_url' => 'http://fraklopez.com'
    );
@@ -13,9 +13,11 @@ class Hooks_pagereorder_redux extends Hooks {
   public function control_panel__add_to_head() {
     if (URL::getCurrent(false) === '/entries') {
       $add_on = 'pagereorder_redux';
+      $base_url = Config::get('_site_url', '/');
 
-      return '<link rel="stylesheet" href="/_add-ons/'. $add_on .'/css/' .
-              $add_on .'.css" media="all" type="text/css"></link>';
+      return '<link rel="stylesheet" href="'. $base_url .'/_add-ons/' .
+              $add_on .'/css/'. $add_on . '.css" media="all" ' .
+              'type="text/css"></link>';
     }
   }
 
@@ -24,9 +26,10 @@ class Hooks_pagereorder_redux extends Hooks {
   public function control_panel__add_to_foot() {
     if (URL::getCurrent(false) === '/entries') {
       $add_on = 'pagereorder_redux';
+      $base_url = Config::get('_site_url', '/');
 
-      return '<script type="text/javascript" src="/_add-ons/'. $add_on .
-              '/js/jquery.'. $add_on .'.js"></script>';
+      return '<script type="text/javascript" src="'. $base_url .
+              '/_add-ons/'. $add_on .'/js/jquery.'. $add_on .'.js"></script>';
     }
   }
 
